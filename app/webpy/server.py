@@ -1,15 +1,31 @@
 import web
-from routes import urls
-from config import db_config
-from controllers.hello import hello
+import model
 
-# Only for testing
-from helpers.init_tables import init_tables
-print init_tables(db_config['db'])
+### Url mappings
 
-db = web.database(dbn=db_config['dbn'], db=db_config['db'])
+urls = (
+    '/', 'Index',
+    '/feed', 'Feed',
+    '/me', 'Me',
+    '/users', 'User',
+    '/session/(.*)', 'Session'
+)
+
+
+t_globals = {
+    'datestr': web.datestr
+}
+render = web.template.render('templates', base='base', globals=t_globals)
+
+
+class Feed:
+    def GET(self):
+        tweets = model.get_tweets(1)
+        return render.feed(tweets)
+
+
 
 app = web.application(urls, globals())
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run()
