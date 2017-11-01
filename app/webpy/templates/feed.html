@@ -3,10 +3,41 @@ $def with (status, data)
 <!DOCTYPE html>
 <html>
 <head>
+	<link rel="stylesheet" href="/static/BareCSS/css/bare.min.css">
 	<title>Home Page</title>
 </head>
 	<body>
-		$if status:
-		    $data
+		<nav>
+			<label>
+				<input type="checkbox">
+				<header>
+					<a>FEED</a>
+				</header>
+				<ul>
+					<li><a href="index.html">Following</a></li>
+					<li><a href="about.html">Profile</a></li>
+					<li>
+						<a>Dropdown</a>
+						<menu>
+							<menuitem><a href="#">Item one</a></menuitem>
+							<menuitem><a href="#">Item two</a></menuitem>
+						</menu>
+					</li>
+				</ul>
+			</label>
+		</nav>
+		$for i in data:
+			<grid>
+				<div col="1">
+					<card>
+						<h5>$i.title</h5>
+						<hr>
+						<p>$i.body</p>
+						<button>Reply</button>
+						<button>Retweet</button>
+					</card>
+
+				</div>
+			</grid>	
 	</body>
 </html>
