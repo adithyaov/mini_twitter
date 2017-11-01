@@ -47,6 +47,10 @@ try:
 except:
     pass
 
+def seed():
+    Tweet(user_id=1, title='Hello World', content='Sahely ki Jai!')
+    Tweet(user_id=1, title='Hello World Again', content='Mrinal ki Jai!')
+
 def get_tweets(user_id):
     try:
         q = Tweet.select().where(Tweet.user_id == user_id)

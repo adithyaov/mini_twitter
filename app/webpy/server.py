@@ -5,6 +5,7 @@ import model
 
 urls = (
     '/', 'Index',
+    '/seed', 'Seed',
     '/feed', 'Feed',
     '/me', 'Me',
     '/users', 'User',
@@ -17,6 +18,9 @@ t_globals = {
 }
 render = web.template.render('templates', globals=t_globals)
 
+class Seed:
+    def GET(self):
+        model.seed()
 
 class Feed:
     def GET(self):
