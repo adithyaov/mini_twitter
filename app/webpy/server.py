@@ -15,7 +15,7 @@ urls = (
 t_globals = {
     'datestr': web.datestr
 }
-render = web.template.render('templates', base='base', globals=t_globals)
+render = web.template.render('templates', globals=t_globals)
 
 
 class Feed:
