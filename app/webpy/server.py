@@ -20,8 +20,8 @@ render = web.template.render('templates', globals=t_globals)
 
 class Feed:
     def GET(self):
-        tweets = model.get_tweets(1)
-        return render.feed(tweets)
+        r = model.get_tweets(1)
+        return render.feed(r[0], r[1])
 
 
 

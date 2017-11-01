@@ -48,4 +48,35 @@ except:
     pass
 
 def get_tweets(user_id):
-    return Tweet.select().where(Tweet.user_id == user_id)
+    try:
+        q = Tweet.select().where(Tweet.user_id == user_id)
+        return (True, q)
+    except Exception as e:
+        return (False, e)
+
+def user_search(query):
+    try:
+        if query.strip() == "":
+            q = User.select()
+            return (True, q)
+        else:
+            q = User.select().where(User.name == query)
+            return (True, q)
+    except Exception as e:
+        return (False, e)
+
+def new_tweet(user_id, title, content):
+    try:
+        t = Tweet(user_id=user_id, title=title, content=content)
+        t.save()
+        return (True, t)
+    except Exception as e:
+        return (False, e)
+
+def del_tweet(user_id, tweet_id):
+    try:
+        q = Tweet.delete().where(Tweet.id == tweet_id, Tweet.user_id == user_id)
+        q.execute()
+        return (True)
+    except Exception as e:
+        return (False, e)
