@@ -1,4 +1,4 @@
-$def with (tweets)
+$def with (status, data)
 
 <!DOCTYPE html>
 <html>
@@ -6,7 +6,7 @@ $def with (tweets)
 	<title>Home Page</title>
 </head>
 	<body>
-		$if tweets:
-		    tweets
+		$if status:
+		    $data
 	</body>
 </html>

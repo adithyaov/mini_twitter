@@ -1,4 +1,4 @@
-$def with (users)
+$def with (status, data)
 
 <!DOCTYPE html>
 <html>
@@ -6,7 +6,7 @@ $def with (users)
 	<title>Home Page</title>
 </head>
 	<body>
-		$if users:
-		    $users
+		$if status:
+		    $data
 	</body>
 </html>
