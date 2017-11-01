@@ -27,17 +27,14 @@ $def with (status, data)
 			</label>
 		</nav>
 		$for i in data:
-			<grid>
-				<div col="1">
-					<card>
-						<h5>$i.title</h5>
-						<hr>
-						<p>$i.body</p>
-						<button>Reply</button>
-						<button>Retweet</button>
-					</card>
-
-				</div>
-			</grid>	
+			<div style="margin: auto; width: 600px;">
+				<card style="margin-top: 14px">
+					<h5>$i.title</h5>
+					<hr>
+					<p>$i.content</p>
+					<button>Reply</button>
+					<button>Retweet</button>
+				</card>
+			</div>	
 	</body>
 </html>

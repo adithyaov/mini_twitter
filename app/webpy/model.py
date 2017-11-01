@@ -48,8 +48,10 @@ except:
     pass
 
 def seed():
-    Tweet(user_id=1, title='Hello World', content='Sahely ki Jai!')
-    Tweet(user_id=1, title='Hello World Again', content='Mrinal ki Jai!')
+    t1 = Tweet(user_id=1, title='Hello World', content='Sahely ki Jai!')
+    t2 = Tweet(user_id=1, title='Hello World Again', content='Mrinal ki Jai!')
+    t1.save()
+    t2.save()
 
 def get_tweets(user_id):
     try:
