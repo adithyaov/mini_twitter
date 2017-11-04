@@ -27,6 +27,11 @@ class Feed:
         r = model.get_tweets(1)
         return render.feed(r[0], r[1])
 
+    def POST(self):
+        post_data = web.input(_method='post')
+        model.new_tweet(1, post_data['title'], post_data['content'])
+        raise web.redirect('/feed')
+
 
 
 app = web.application(urls, globals())

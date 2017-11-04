@@ -26,6 +26,14 @@ $def with (status, data)
 				</ul>
 			</label>
 		</nav>
+		<form method="post">
+			<label>Username</label>
+			<input placeholder="username" type="text">
+			<label>Password</label>
+			<input placeholder="password" type="password">
+			<label>Comment</label>
+			<textarea placeholder="comment"></textarea>
+		</form>
 		$for i in data:
 			<div style="margin: auto; width: 600px;">
 				<card style="margin-top: 14px">
