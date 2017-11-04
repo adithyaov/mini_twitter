@@ -3,13 +3,36 @@ $def with (status, data)
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Home Page</title>
+	<title>User Profile page</title>
+	<link rel="stylesheet" href="/static/BareCSS/css/bare.min.css">
 </head>
 	<body>
-		<card>
-			<h5>Name</h5>
-			<img src="img/sign.jpg" alt="sign">
-			<p>Content goes here</p>
-		</card>
+	<nav>
+		<label>
+			<input type="checkbox">
+			<header>
+				<a>FEED</a>
+			</header>
+			<ul>
+				<li><a href="following.html">Following</a></li>
+				<li>
+					<a>Dropdown</a>
+					<menu>
+						<menuitem><a href="#">Item one</a></menuitem>
+						<menuitem><a href="#">Item two</a></menuitem>
+					</menu>
+				</li>
+			</ul>
+		</label>
+		</nav>
+		<grid>
+			<div>
+				<card style="margin-top: 14px;margin-left: 300px;margin-right : 300px">
+					<h3>$data["name"]</h3>
+					<div><img src=$data["image"] alt="sign"></div>
+					<h5>$data["email"]</h5>
+				</card>
+			</div>
+</grid>
 	</body>
 </html>
