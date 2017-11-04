@@ -32,6 +32,15 @@ class Feed:
         model.new_tweet(1, post_data['title'], post_data['content'])
         raise web.redirect('/feed')
 
+class Me:
+    def GET(self):
+        test_data = {
+            "name": "Varshith Polu",
+            "email": "111501020@samil.iitpkd.ac.in",
+            "image": "https://images.duckduckgo.com/iu/?u=https%3A%2F%2Ftse2.mm.bing.net%2Fth%3Fid%3DOIP.t7pp36obNYiHr92yA_ko8QEsDH%26pid%3D15.1&f=1"
+        }
+        return render.feed(True, test_data)
+
 
 
 app = web.application(urls, globals())
