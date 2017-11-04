@@ -5,13 +5,14 @@ $def with (status, data)
 <head>
 	<title>User Profile page</title>
 	<link rel="stylesheet" href="/static/BareCSS/css/bare.min.css">
+	<link rel="stylesheet" href="/static/bulma/0.6.0/css/bulma.min.css">
 </head>
 	<body>
 	<nav>
 		<label>
 			<input type="checkbox">
 			<header>
-				<a>FEED</a>
+				<a>MINI_TWITTER</a>
 			</header>
 			<ul>
 				<li><a href="following.html">Following</a></li>
@@ -29,6 +30,7 @@ $def with (status, data)
 			<div>
 				<card style="margin-top: 14px;margin-left: 300px;margin-right : 300px">
 					<h3>$data.name</h3>
+					<div><img src=" " alt = "no image"></div>
 					<h5>$data.email</h5>
 				</card>
 			</div>
