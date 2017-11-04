@@ -60,6 +60,13 @@ def get_tweets(user_id):
     except Exception as e:
         return (False, e)
 
+def get_me(user_id):
+    try:
+        q = User.select().where(User.id == user_id).get()
+        return (True, q)
+    except Exception as e:
+        return (False, e)
+
 def user_search(query):
     try:
         if query.strip() == "":
@@ -84,5 +91,16 @@ def del_tweet(user_id, tweet_id):
         q = Tweet.delete().where(Tweet.id == tweet_id, Tweet.user_id == user_id)
         q.execute()
         return (True)
+    except Exception as e:
+        return (False, e)
+
+
+def get_following(user_id):
+    try:
+        q = Following.select().where(Following.user_id == user_id).get()
+        following_ids = q.following_ids
+        following_ids_list = following_ids.split(',')
+        q2 = User.select().where(User.id in following_ids_list)
+        return (True, q2)
     except Exception as e:
         return (False, e)
