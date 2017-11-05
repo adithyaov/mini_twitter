@@ -2,12 +2,23 @@ import web
 web.config.debug = False
 
 urls = (
-    "/count", "count",
-    "/reset", "reset"
+    "/", "Home",
+    "/home", "Home",
+    "/login", "Login",
+    "/logout", "Logout",
+    "/following", "Following",
+    "/followers", "Followers",
+    "/users/(.*)", "Users",
+    "/relation/(.+)/(.+)", "Relation"
 )
 
 app = web.application(urls, locals())
 session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'logged_in': False})
+
+t_globals = {
+    'datestr': web.datestr
+}
+render = web.template.render('templates', globals=t_globals)
 
 def auth_user(user):
     session.logged_in = True
@@ -30,10 +41,14 @@ def get_object_or_throw(model, *expressions):
     try:
         return model.get(*expressions)
     except:
-        raise web.redirect('/not_found')
+        return render.error('Not Found, 404!')
 
 def is_following(from_user, to_user):
     return from_user.is_following(to_user)
+
+class Home:
+    def GET(self):
+        return render.home()
 
 class Timeline:
     def GET(self):
@@ -117,11 +132,11 @@ class Users:
             users = User.select()
             return render.users(users)
         else:
-             user = get_object_or_throw(User, User.username == username)
-             tweets = Tweet.select().where(user=user).order_by(('pub_date', 'desc'))
-             return render.user_detail(user, tweets)
+            user = get_object_or_throw(User, User.username == username)
+            tweets = Tweet.select().where(user=user).order_by(('pub_date', 'desc'))
+            return render.user_detail(user, tweets)
 
-class Follow:
+class Relation:
     def GET(self, username, action):
         should_be_logged_in()
         if action == 'follow':
