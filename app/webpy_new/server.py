@@ -1,4 +1,5 @@
 import web
+from model import *
 web.config.debug = False
 
 urls = (
