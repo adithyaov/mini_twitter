@@ -11,9 +11,10 @@ $def with (status, data)
 			<label>
 				<input type="checkbox">
 				<header>
-					<a>FEED</a>
+					<a>Mini_Twitter</a>
 				</header>
 				<ul>
+					<li><a href="index.html">Feed</a></li>
 					<li><a href="index.html">Following</a></li>
 					<li><a href="about.html">Profile</a></li>
 					<li>
@@ -26,21 +27,21 @@ $def with (status, data)
 				</ul>
 			</label>
 		</nav>
-		<form method="post">
-			<label>Username</label>
-			<input placeholder="username" type="text">
-			<label>Password</label>
-			<input placeholder="password" type="password">
-			<label>Comment</label>
-			<textarea placeholder="comment"></textarea>
-		</form>
+		<div style = "margin-left: 200px;margin-right: 200px">
+			<card style="margin-top: 14px">
+				<form method="post">			
+					<label>Tweet</label>
+					<textarea placeholder="comment"></textarea>
+					<button style = "margin-left: 700px">Tweet</button>
+				</form>
+			</card>
+		</div>
+		
 		$for i in data:
 			<div style="margin: auto; width: 600px;">
 				<card style="margin-top: 14px">
-					<h5>$i.title</h5>
-					<hr>
-					<p>$i.content</p>
-					<button>Reply</button>
+					<h5>$i.content</h5>
+					<p style = "margin-left: 350px">$i.title</p>
 					<button>Retweet</button>
 				</card>
 			</div>	

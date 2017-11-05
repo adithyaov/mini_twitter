@@ -1,23 +1,4 @@
-# import web
 
-# db = web.database(dbn='sqlite', db='main.sqlite')
-
-# def get_tweets(user_id):
-#     constrains = dict(user_id=user_id)
-#     return db.select('Tweets', where=web.db.sqlwhere(constrains), order='id DESC')
-
-# def user_search(query):
-#     if query.strip() == "":
-#         return db.select('Users')
-#     else:
-#         return db.select('Users')
-
-# def new_tweet(user_id, title, text):
-#     db.insert('Tweets', user_id=user_id, title=title, content=text)
-
-# def del_tweet(user_id, tweet_id):
-#     constrains = dict(user_id=user_id, id=tweet_id)
-#     db.delete('Tweets', where=web.db.sqlwhere(constrains), vars=locals())
 
 from peewee import *
 
@@ -25,7 +6,7 @@ db = SqliteDatabase('main.db')
 
 class User(Model):
     name = CharField()
-    password = CharField()
+    image = TextField()
     email = CharField(unique=True)
     class Meta:
         database = db
@@ -50,8 +31,17 @@ except:
 def seed():
     t1 = Tweet(user_id=1, title='Hello World', content='Sahely ki Jai!')
     t2 = Tweet(user_id=1, title='Hello World Again', content='Mrinal ki Jai!')
+    u1 = User(name="varshith",image = "kjh", email="varshithpolu@polu.com")
+    u2 = User(name="aditya",image = "kjh", email="adityas@polu.com")
+    u3 = User(name="nishanth",image = "kjh", email="nishanth@polu.com")
+
+    f1 = Following(user_id = 1,following_ids = "1,2")
     t1.save()
     t2.save()
+    u1.save()
+    u2.save()
+    u3.save()
+    f1.save()
 
 def get_tweets(user_id):
     try:

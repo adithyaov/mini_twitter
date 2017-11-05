@@ -8,6 +8,7 @@ urls = (
     '/seed', 'Seed',
     '/feed', 'Feed',
     '/me', 'Me',
+    '/following', 'Following',
     '/users', 'User',
     '/session/(.*)', 'Session'
 )
@@ -35,7 +36,7 @@ class Feed:
 class Me:
     def GET(self):
         me = model.get_me(1)
-        return render.me(True, me)
+        return render.me(me[0], me[1])
 
 class User:
     def GET(self, query):
@@ -49,7 +50,6 @@ class Following:
     def GET(self):
         r = model.get_following(1)
         return render.following(r[0], r[1])
-
 
 
 
