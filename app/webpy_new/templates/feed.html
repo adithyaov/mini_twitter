@@ -1,0 +1,48 @@
+$def with (status, data)
+
+<!DOCTYPE html>
+<html>
+<head>
+	<link rel="stylesheet" href="/static/BareCSS/css/bare.min.css">
+	<title>Home Page</title>
+</head>
+	<body>
+		<nav>
+			<label>
+				<input type="checkbox">
+				<header>
+					<a>FEED</a>
+				</header>
+				<ul>
+					<li><a href="index.html">Following</a></li>
+					<li><a href="about.html">Profile</a></li>
+					<li>
+						<a>Dropdown</a>
+						<menu>
+							<menuitem><a href="#">Item one</a></menuitem>
+							<menuitem><a href="#">Item two</a></menuitem>
+						</menu>
+					</li>
+				</ul>
+			</label>
+		</nav>
+		<form method="post">
+			<label>Username</label>
+			<input placeholder="username" type="text">
+			<label>Password</label>
+			<input placeholder="password" type="password">
+			<label>Comment</label>
+			<textarea placeholder="comment"></textarea>
+		</form>
+		$for i in data:
+			<div style="margin: auto; width: 600px;">
+				<card style="margin-top: 14px">
+					<h5>$i.title</h5>
+					<hr>
+					<p>$i.content</p>
+					<button>Reply</button>
+					<button>Retweet</button>
+				</card>
+			</div>	
+	</body>
+</html>
