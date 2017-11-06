@@ -4,45 +4,61 @@ $def with (tweets)
 <html>
 <head>
     <title>Timeline</title>
+    <link rel="stylesheet" href="/static/normalize.css">
     <link rel="stylesheet" href="/static/blaze.min.css">
+    <style type="text/css">
+      body {
+        font-family: arial;
+      }
+      .c-nav a {
+        text-decoration: none;
+        color: #333;
+      }
+      .c-nav li:hover a{
+        color: #fff;
+      }
+      .c-card form {
+        margin-top: 10px;
+      }
+    </style>
 </head>
 <body>
 
-  <ul class="c-nav c-nav--inline u-highest">
-      <span class="c-nav__item"><i class="fa fa-home"></i><a href="/home">Home</a></span>
-      <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/logout">Logout</a></span>
-      <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/following">Following</a></span>
-      <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/followers">Followers</a></span>
-      <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/users/_">all_users</a></span>
-
+  <ul class="c-nav c-nav--light c-nav--inline">
+    <li class="c-nav__item"><a href="/home">Home</a></li>
+    <li class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i> <a href="/users/_">Users</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/followers">Followers</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/following">Following</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/logout">Logout</a></li>
   </ul>
+
+
   <div class="o-container o-container--medium">
 
 
     <form method="post" action="/timeline">
       <label class="c-label">
-          Content:
+        Content:
         <input name="content" type="text" class="c-field c-field--label">
       </label>
-      <input class="c-button" type="submit" value="Tweet">
+      <input class="c-button c-button--brand" type="submit" value="Tweet">
     </form>
 
+    <br>
 
     $for i in tweets:
+
       <div class="c-card">
-        <header class="c-card__header">
-        <h2 class="c-heading">
-          $i.user.username
-        </h2>
-        </header>
-        <div class="c-card__body">
+        <div class="c-card__item">
           <p class="c-paragraph">$i.content</p>
+          <b>@$i.user.username</b>
+          <form method="post" action="/timeline">
+              <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
+              <input class="c-button c-button--info" type="submit" value="Retweet">
+          </form>
         </div>
-        <form method="post" action="/timeline">
-            <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
-            <input class="c-button" type="submit" value="ReTweet">
-        </form>
       </div>
+
   </div>
 </body>
 </html>
