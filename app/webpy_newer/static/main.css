@@ -11,6 +11,9 @@ body {
 .c-card form {
   margin-top: 10px;
 }
+.c-card a {
+  text-decoration: none;
+}
 hr {
   margin: 0;
   padding: 0;
@@ -19,4 +22,3 @@ hr {
   background: #c0c0c0;
   margin-top: 15px;
   margin-bottom: 15px;
-}

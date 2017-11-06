@@ -4,55 +4,43 @@ $def with (session, user, tweets)
 <html>
 <head>
     <title>Profile</title>
+    <link rel="stylesheet" href="/static/normalize.css">
     <link rel="stylesheet" href="/static/blaze.min.css">
+    <link rel="stylesheet" href="/static/main.css">
 </head>
 <body>
-
-  <ul class="c-nav c-nav--inline u-highest">
-          <span class="c-nav__item"><i class="fa fa-home"></i><a href="/home">Home</a></span>
-          <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/logout">Logout</a></span>
-          <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/following">Following</a></span>
-          <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/followers">Followers</a></span>
+  <ul class="c-nav c-nav--light c-nav--inline">
+    <li class="c-nav__item"><a href="/home">Home</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/logout">Logout</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/users/$session.username">Me</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/timeline">Timeline</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/users/_">Users</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/followers">Following</a></li>
   </ul>
-  <div class="o-container o-container--medium">
-        <div class="c-card">
-          <div class="o-grid o-grid--demo">
-              <div class="o-grid__cell">
-                <div class="o-grid">
-                  <div class="o-grid__cell">
-                      <img class="o-image" src="http://lorempixel.com/200/200/#$user.username" alt = "Not available">
-                  </div>
-                  <div class="o-grid__cell">
-                    <header class="c-card__header">
-                      <h2 class="c-heading">$user.username</h2>
-                    </header>
-                    <p>$user.email</p>
-                  </div>
-                </div>
-                  <div class="o-grid">
-                    <div class="o-grid__cell">
-                       <a href="/relation/$user.username/follow" class="c-button">Follow</a>
+  <div style="margin-top: 20px;" class="o-container o-container--medium">
+
+                  <div class="c-card">
+                    <div class="c-card__item c-card__item--brand">$user.username</div>
+                    <div class="c-card__item c-card__item--success">
+                      <p class="c-paragraph">$user.email</p>
                     </div>
                   </div>
-                </div>
-           </div>
-          </div>
+                  <br>
+                  <a href="/relation/$user.username/follow" class="c-button">Follow</a>
+
+          <hr>
 
           $for i in tweets:
-            <div class="c-card">
-              <header class="c-card__header">
-                <h2 class="c-heading">
-                  $i.user.username
-                </h2>
-              </header>
-              <div class="c-card__body">
-                <p class="c-paragraph">$i.content</p>
-              </div>
-              <form method="post" action="/timeline">
-                  <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
-                  <input class="c-button" type="submit" value="ReTweet">
-              </form>
-            </div>
+                  <div class="c-card">
+                    <div class="c-card__item">
+                      <p class="c-paragraph">$i.content</p>
+                      <b>@$i.user.username</b>
+                      <form method="post" action="/timeline">
+                          <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
+                          <input class="c-button c-button--info" type="submit" value="Retweet">
+                      </form>
+                    </div>
+                  </div>
     </div>
 
 </body>

@@ -1,4 +1,4 @@
-$def with (users_you_follow)
+$def with (session,users_you_follow)
 
 <!DOCTYPE html>
 <html>
@@ -19,30 +19,17 @@ $def with (users_you_follow)
     <li class="c-nav__item c-nav__item--right"><a href="/followers">Followers</a></li>
   </ul>
 
-  <div class="o-container o-container--medium">
+  <div style="margin-top: 20px;" class="o-container o-container--medium">
     $for i in users_you_follow:
         <div class="c-card">
-          <div class="o-grid o-grid--demo">
-              <div class="o-grid__cell">
-                <div class="o-grid">
-                  <div class="o-grid__cell">
-                      <img class="o-image" src="http://lorempixel.com/200/200/#$i.username" alt = "Not available">
-                  </div>
-                  <div class="o-grid__cell">
-                    <header class="c-card__header">
-                      <h2 class="c-heading">$i.username</h2>
-                    </header>
-                    <p>$i.email</p>
-                  </div>
-                </div>
-                  <div class="o-grid">
-                    <div class="o-grid__cell">
-                          <a href="/relation/$i.username/unfollow" class="c-button">Unfollow</a>
-                    </div>
-                  </div>
-                </div>
-           </div>
-          </div>
+        <div class="c-card__item">
+          <p class="c-paragraph">$i.email</p>
+          <b><a href="/users/$i.username">@$i.username</a></b>
+          <form method="get" action="/relation/$i.username/unfollow">
+              <input class="c-button c-button--info" type="submit" value="Unfollow">
+          </form>
+        </div>
+        </div>
 
   </div>
 </body>
