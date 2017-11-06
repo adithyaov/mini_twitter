@@ -1,0 +1,22 @@
+body {
+  font-family: arial;
+}
+.c-nav a {
+  text-decoration: none;
+  color: #333;
+}
+.c-nav li:hover a{
+  color: #fff;
+}
+.c-card form {
+  margin-top: 10px;
+}
+hr {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  height: 1px;
+  background: #c0c0c0;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
