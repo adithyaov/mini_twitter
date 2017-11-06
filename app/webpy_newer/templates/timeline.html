@@ -20,6 +20,15 @@ $def with (tweets)
       .c-card form {
         margin-top: 10px;
       }
+      hr {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        height: 1px;
+        background: #c0c0c0;
+        margin-top: 15px;
+        margin-bottom: 15px;
+      }
     </style>
 </head>
 <body>
@@ -38,13 +47,13 @@ $def with (tweets)
 
     <form method="post" action="/timeline">
       <label class="c-label">
-        Content:
-        <input name="content" type="text" class="c-field c-field--label">
+        Tweet:
+        <textarea name="content" class="c-field c-field--label"></textarea>
       </label>
       <input class="c-button c-button--brand" type="submit" value="Tweet">
     </form>
 
-    <br>
+    <hr />
 
     $for i in tweets:
 
