@@ -50,4 +50,4 @@ class Tweet(BaseModel):
 
 def create_tables():
     db.connect()
-    db.create_tables([User, Relationship, Message])
+    db.create_tables([User, Relationship, Tweet])

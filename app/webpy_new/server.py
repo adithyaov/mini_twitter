@@ -16,6 +16,11 @@ urls = (
 app = web.application(urls, locals())
 session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'logged_in': False})
 
+try:
+    create_tables()
+except:
+    print 'Already created tables! :-)'
+
 t_globals = {
     'datestr': web.datestr
 }
