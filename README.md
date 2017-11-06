@@ -1,3 +1,3 @@
 # README #
 
-This project is effectively a system which can recommand experts to the applicants meaningfully
+This project is a social networking website which resembles the twitter.
