@@ -1,7 +1,6 @@
 import web
 import datetime
 from model import *
-web.config.debug = False
 
 urls = (
     "/", "Home",
@@ -17,7 +16,15 @@ urls = (
 )
 
 app = web.application(urls, locals())
-session = web.session.Session(app, web.session.DiskStore('sessions'), initializer={'logged_in': False})
+
+def set_session(logged_in, user_id, username, time=3600):
+    web.setcookie('logged_in', logged_in, time)
+    web.setcookie('user_id', user_id, time)
+    web.setcookie('username', username, time)
+
+set_session(False, 0, '_')
+session = web.cookies()
+
 
 try:
     create_tables()
@@ -30,12 +37,10 @@ t_globals = {
 render = web.template.render('templates', globals=t_globals)
 
 def auth_user(user):
-    session.logged_in = True
-    session.user_id = user.id
-    session.username = user.username
+    set_session(True, user.id, user.username)
 
 def get_current_user():
-    if session.logged_in:
+    if session.logged_in == True:
         return User.get(User.id == session.user_id)
 
 def should_be_logged_in():
@@ -120,7 +125,7 @@ class Login:
 class Logout:
     def GET(self):
         should_be_logged_in()
-        session.logged_in = False
+        set_session(False, 0, '_')
         raise web.redirect('/home')
 
 class Following:
