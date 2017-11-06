@@ -37,6 +37,23 @@ $def with (user , tweets)
                 </div>
            </div>
           </div>
-  </div>
+
+          $for i in tweets:
+            <div class="c-card">
+              <header class="c-card__header">
+                <h2 class="c-heading">
+                  $i.username
+                </h2>
+              </header>
+              <div class="c-card__body">
+                <p class="c-paragraph">$i.content</p>
+              </div>
+              <form method="post" action="/timeline">
+                  <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
+                  <input class="c-button" type="submit" value="ReTweet">
+              </form>
+            </div>
+    </div>
+
 </body>
 </html>
