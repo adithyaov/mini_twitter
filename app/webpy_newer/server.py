@@ -173,7 +173,7 @@ class Users:
             return render.users(users)
         else:
             user = get_object_or_throw(User, User.username == username)
-            tweets = Tweet.select().where(Tweet.user==user).order_by(('pub_date', 'desc'))
+            tweets = Tweet.select().where(Tweet.user==user)
             return render.user_detail(user, tweets)
 
 class Relation:
