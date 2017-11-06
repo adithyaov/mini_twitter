@@ -92,7 +92,12 @@ class Register:
                     email=post_data['email'],
                     join_date=datetime.datetime.now())
 
+                Relationship.create(
+                    from_user=user,
+                    to_user=user)
+
                 auth_user(user)
+
             echo = 1
         except Exception as e:
             print e
@@ -182,6 +187,8 @@ class Relation:
 
         if action == 'unfollow':
             user = get_object_or_throw(User, User.username == username)
+            if user.username == session.username:
+                raise web.seeother('/following')
             Relationship.delete().where(
                 (Relationship.from_user == get_current_user()) &
                 (Relationship.to_user == user)
