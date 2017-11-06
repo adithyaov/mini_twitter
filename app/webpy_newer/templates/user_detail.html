@@ -1,4 +1,4 @@
-$def with (session, user, tweets)
+$def with (session, user, tweets, is_following)
 
 <!DOCTYPE html>
 <html>
@@ -29,8 +29,10 @@ $def with (session, user, tweets)
                     </div>
                   </div>
                   <br>
-                  <a href="/relation/$user.username/follow" class="c-button">Follow</a>
-
+                  $if is_following:
+                    <a href="/relation/$user.username/unfollow" class="c-button">Unfollow</a>
+                  $else:
+                    <a href="/relation/$user.username/follow" class="c-button">Follow</a>
           <hr>
 
           $for i in tweets:

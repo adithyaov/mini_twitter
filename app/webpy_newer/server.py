@@ -4,8 +4,8 @@ from model import *
 web.config.debug = False
 
 urls = (
-    "/", "Home",
-    "/home", "Home",
+    "/", "Login",
+    "/home", "Login",
     "/login", "Login",
     "/logout", "Logout",
     "/following", "Following",
@@ -14,6 +14,7 @@ urls = (
     "/relation/(.+)/(.+)", "Relation",
     "/timeline", "Timeline",
     "/register", "Register",
+    "/*", "Login"
 )
 
 app = web.application(urls, locals())
@@ -174,7 +175,8 @@ class Users:
         else:
             user = get_object_or_throw(User, User.username == username)
             tweets = Tweet.select().where(Tweet.user==user)
-            return render.user_detail(session, user, tweets)
+            is_following = get_current_user().is_following(user)
+            return render.user_detail(session, user, tweets, is_following)
 
 class Relation:
     def GET(self, username, action):
