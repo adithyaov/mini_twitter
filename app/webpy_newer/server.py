@@ -66,7 +66,7 @@ class Timeline:
         should_be_logged_in()
         user = get_current_user()
         tweets = Tweet.select().where(Tweet.user << user.following())
-        return render.timeline(tweets)
+        return render.timeline(session, tweets)
 
     def POST(self):
         should_be_logged_in()
@@ -152,13 +152,13 @@ class Following:
     def GET(self):
         should_be_logged_in()
         user = get_current_user()
-        return render.following(user.following())
+        return render.following(session, user.following())
 
 class Followers:
     def GET(self):
         should_be_logged_in()
         user = get_current_user()
-        return render.followers(user.followers())
+        return render.followers(session, user.followers())
 
 class Users:
     def GET(self, username):
@@ -170,11 +170,11 @@ class Users:
             for x in following_users:
                 following_usernames.append(x.username)
             users = User.select().where(User.username.not_in(following_usernames))
-            return render.users(users)
+            return render.users(session,users)
         else:
             user = get_object_or_throw(User, User.username == username)
             tweets = Tweet.select().where(Tweet.user==user)
-            return render.user_detail(user, tweets)
+            return render.user_detail(session, user, tweets)
 
 class Relation:
     def GET(self, username, action):
