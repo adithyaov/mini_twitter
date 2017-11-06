@@ -9,8 +9,10 @@ $def with (users)
 <body>
 
   <ul class="c-nav c-nav--inline u-highest">
-          <span class="c-nav__item"><i class="fa fa-home"></i> Home</span>
+          <span class="c-nav__item"><i class="fa fa-home"></i><a href="/home">Home</a></span>
           <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/logout">Logout</a></span>
+          <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/following">Following</a></span>
+          <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/followers">Followers</a></span>
   </ul>
   <div class="o-container o-container--medium">
     $for i in users:
