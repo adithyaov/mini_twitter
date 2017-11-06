@@ -11,7 +11,9 @@ $def with (session,tweets)
 <body>
 
   <ul class="c-nav c-nav--light c-nav--inline">
-    <li class="c-nav__item"><a href="/home">Home</a></li>
+    <li class="c-nav__item"><a href="/home
+  "><img src="/static/logo.png" style="height:40px; margin-top:8px
+  "></a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/logout">Logout</a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/users/$session.username">Me</a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/timeline">Timeline</a></li>
@@ -39,7 +41,7 @@ $def with (session,tweets)
       <div class="c-card">
         <div class="c-card__item">
           <p class="c-paragraph">$i.content</p>
-          <b>@$i.user.username</b>
+          <b><a href="/users/$i.user.username">@$i.user.username</a></b>
           <form method="post" action="/timeline">
               <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
               <input class="c-button c-button--info" type="submit" value="Retweet">

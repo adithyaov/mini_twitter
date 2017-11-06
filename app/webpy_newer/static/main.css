@@ -13,6 +13,7 @@ body {
 }
 .c-card a {
   text-decoration: none;
+  color: #000;
 }
 hr {
   margin: 0;
