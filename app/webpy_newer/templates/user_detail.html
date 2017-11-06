@@ -24,30 +24,30 @@ $def with (session, user, tweets, is_following)
 
   <div style="margin-top: 20px;" class="o-container o-container--medium">
 
-                  <div class="c-card">
-                    <div class="c-card__item c-card__item--brand">$user.username</div>
-                    <div class="c-card__item c-card__item--success">
-                      <p class="c-paragraph">$user.email</p>
-                    </div>
-                  </div>
-                  <br>
-                  $if is_following:
-                    <a href="/relation/$user.username/unfollow" class="c-button">Unfollow</a>
-                  $else:
-                    <a href="/relation/$user.username/follow" class="c-button">Follow</a>
-          <hr>
+    <div class="c-card">
+      <div class="c-card__item c-card__item--brand">$user.username</div>
+      <div class="c-card__item c-card__item--success">
+        <p class="c-paragraph">$user.email</p>
+      </div>
+    </div>
+    <br>
+    $if is_following:
+      <a href="/relation/$user.username/unfollow" class="c-button">Unfollow</a>
+    $else:
+      <a href="/relation/$user.username/follow" class="c-button">Follow</a>
+    <hr>
 
-          $for i in tweets:
-                  <div class="c-card">
-                    <div class="c-card__item">
-                      <p class="c-paragraph">$i.content</p>
-                      <b>@$i.user.username</b>
-                      <form method="post" action="/timeline">
-                          <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
-                          <input class="c-button c-button--info" type="submit" value="Retweet">
-                      </form>
-                    </div>
-                  </div>
+    $for i in tweets:
+      <div class="c-card">
+        <div class="c-card__item">
+          <p class="c-paragraph">$i.content</p>
+          <b>@$i.user.username</b>
+          <form method="post" action="/timeline">
+              <input value="$i.content" name="content" type="hidden" class="c-field c-field--label">
+              <input class="c-button c-button--info" type="submit" value="Retweet">
+          </form>
+        </div>
+      </div>
     </div>
 
 </body>

@@ -24,7 +24,7 @@ $def with (session,users_you_follow)
 
   <div style="margin-top: 20px;" class="o-container o-container--medium">
     $for i in users_you_follow:
-        <div class="c-card">
+      <div class="c-card">
         <div class="c-card__item">
           <p class="c-paragraph">$i.email</p>
           <b><a href="/users/$i.username">@$i.username</a></b>
@@ -32,7 +32,7 @@ $def with (session,users_you_follow)
               <input class="c-button c-button--info" type="submit" value="Unfollow">
           </form>
         </div>
-        </div>
+      </div>
 
   </div>
 </body>

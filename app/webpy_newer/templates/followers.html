@@ -25,11 +25,11 @@ $def with (session,users_following_you)
   <div style="margin-top: 20px;" class="o-container o-container--medium">
 
     $for i in users_following_you:
-        <div class="c-card">
-          <div class="c-card__item">
-            <p class="c-paragraph">$i.email</p>
-            <b><a href="/users/$i.username">@$i.username</a></b>
-          </div>
+      <div class="c-card">
+        <div class="c-card__item">
+          <p class="c-paragraph">$i.email</p>
+          <b><a href="/users/$i.username">@$i.username</a></b>
         </div>
+      </div>
 </body>
 </html>
