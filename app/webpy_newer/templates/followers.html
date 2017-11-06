@@ -9,11 +9,13 @@ $def with (session,users_following_you)
     <link rel="stylesheet" href="/static/main.css">
 </head>
 <body>
+
   <ul class="c-nav c-nav--light c-nav--inline">
     <li class="c-nav__item"><a href="/home">Home</a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/logout">Logout</a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/users/$session.username">Me</a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/timeline">Timeline</a></li>
+    <li class="c-nav__item c-nav__item--right"><a href="/followers">Followers</a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/users/_">Users</a></li>
     <li class="c-nav__item c-nav__item--right"><a href="/following">Following</a></li>
   </ul>
