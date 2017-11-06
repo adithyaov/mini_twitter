@@ -1,9 +1,39 @@
+$def with ()
+
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Register</title>
+	<link rel="stylesheet" href="/static/blaze.min.css">
 </head>
 <body>
 
+	<ul class="c-nav c-nav--inline u-highest">
+	  <span class="c-nav__item"><i class="fa fa-home"></i> Home</span>
+	  <span class="c-nav__item"><i class="fa fa-star"></i> News</span>
+	  <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i> Contact</span>
+	</ul>
+
+	<div class="o-container o-container--medium">
+		<form method="post" action="/register">
+			<label class="c-label">
+			  Username:
+			  <input name="username" type="text" class="c-field c-field--label">
+			  <div class="c-hint"></div>
+			</label>
+			<label class="c-label">
+			  Email:
+			  <input name="email" type="email" class="c-field c-field--label">
+			  <div class="c-hint"></div>
+			</label>
+			<label class="c-label">
+			  Password:
+			  <input name="password" type="password" class="c-field c-field--label">
+			  <div class="c-hint"></div>
+			</label>
+			<input class="c-button" type="submit" value="Register">
+		</form>
+		
+	</div>
 </body>
 </html>

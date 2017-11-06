@@ -1,4 +1,5 @@
 import web
+import datetime
 from model import *
 web.config.debug = False
 
@@ -10,7 +11,9 @@ urls = (
     "/following", "Following",
     "/followers", "Followers",
     "/users/(.*)", "Users",
-    "/relation/(.+)/(.+)", "Relation"
+    "/relation/(.+)/(.+)", "Relation",
+    "/timeline", "Timeline",
+    "/register", "Register",
 )
 
 app = web.application(urls, locals())
@@ -36,11 +39,11 @@ def get_current_user():
         return User.get(User.id == session.user_id)
 
 def should_be_logged_in():
-    if not session.logged_in:
+    if session.logged_in == False:
         raise web.redirect('/login')
 
 def should_be_logged_out():
-    if session.logged_in:
+    if session.logged_in == True:
         raise web.redirect('/timeline')
 
 def get_object_or_throw(model, *expressions):
@@ -77,16 +80,17 @@ class Register:
         should_be_logged_out()
         try:
             post_data = web.input(_method='post')
-            with database.transaction():
+            with db.transaction():
                 user = User.create(
                     username=post_data['username'],
                     password=post_data['password'],
                     email=post_data['email'],
                     join_date=datetime.datetime.now())
 
-            auth_user(user)
+                auth_user(user)
             raise web.redirect('/timeline')
-        except:
+        except Exception as e:
+            print e
             raise web.redirect('/register')
 
     def GET(self):
@@ -148,7 +152,7 @@ class Relation:
         if action == 'follow':
             user = get_object_or_throw(User, User.username == username)
             try:
-                with database.transaction():
+                with db.transaction():
                     Relationship.create(
                         from_user=get_current_user(),
                         to_user=user)
