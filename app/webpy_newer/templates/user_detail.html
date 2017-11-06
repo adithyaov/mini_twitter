@@ -1,11 +1,40 @@
-$def with (user, tweets)
+$def with (user , tweets)
 
 <!DOCTYPE html>
 <html>
 <head>
-	<title>User</title>
+    <title>Profile</title>
+    <link rel="stylesheet" href="/static/blaze.min.css">
 </head>
 <body>
 
+  <ul class="c-nav c-nav--inline u-highest">
+          <span class="c-nav__item"><i class="fa fa-home"></i> Home</span>
+          <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/logout">Logout</a></span>
+  </ul>
+  <div class="o-container o-container--medium">
+        <div class="c-card">
+          <div class="o-grid o-grid--demo">
+              <div class="o-grid__cell">
+                <div class="o-grid">
+                  <div class="o-grid__cell">
+                      <img class="o-image" src="http://lorempixel.com/200/200/#$user.username" alt = "Not available">
+                  </div>
+                  <div class="o-grid__cell">
+                    <header class="c-card__header">
+                      <h2 class="c-heading">$user.username</h2>
+                    </header>
+                    <p>$user.email</p>
+                  </div>
+                </div>
+                  <div class="o-grid">
+                    <div class="o-grid__cell">
+                       <a href="/relation/$user.username/follow" class="c-button">Follow</a>
+                    </div>
+                  </div>
+                </div>
+           </div>
+          </div>
+  </div>
 </body>
 </html>

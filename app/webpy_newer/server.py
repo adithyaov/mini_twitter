@@ -40,11 +40,13 @@ def get_current_user():
 
 def should_be_logged_in():
     if session.logged_in == False:
-        raise web.redirect('/login')
+    	print "login"
+        raise web.seeother('/login')
 
 def should_be_logged_out():
     if session.logged_in == True:
-        raise web.redirect('/timeline')
+        print "logout"
+        raise web.seeother('/timeline')
 
 def get_object_or_throw(model, *expressions):
     try:
@@ -69,11 +71,13 @@ class Timeline:
     def POST(self):
         should_be_logged_in()
         user = get_current_user()
-        tweet = Tweet.create(
-            user=user,
-            content=request.form['content'],
-            pub_date=datetime.datetime.now())
-        raise web.redirect('/timeline')
+        post_data = web.input(_method='post')
+        with db.transaction():
+            tweet = Tweet.create(
+                user=user,
+                content=post_data.content,
+                pub_date=datetime.datetime.now())
+        raise web.seeother('/timeline')
 
 class Register:
     def POST(self):
@@ -95,9 +99,9 @@ class Register:
             echo = 0
 
         if echo == 1:
-            raise web.redirect('/timeline')
+            raise web.seeother('/timeline')
         else:
-            raise web.redirect('/register')
+            raise web.seeother('/register')
 
     def GET(self):
         should_be_logged_out()
@@ -120,9 +124,9 @@ class Login:
             echo = 0
             
         if echo == 1:
-            raise web.redirect('/timeline')
+            raise web.seeother('/timeline')
         else:
-            raise web.redirect('/login')
+            raise web.seeother('/login')
 
 
 
@@ -135,7 +139,9 @@ class Logout:
     def GET(self):
         should_be_logged_in()
         session.logged_in = False
-        raise web.redirect('/home')
+        session.user_id = -1
+        session.username = ''
+        raise web.seeother('/home')
 
 class Following:
     def GET(self):
@@ -157,7 +163,7 @@ class Users:
             return render.users(users)
         else:
             user = get_object_or_throw(User, User.username == username)
-            tweets = Tweet.select().where(user=user).order_by(('pub_date', 'desc'))
+            tweets = Tweet.select().where(Tweet.user==user).order_by(('pub_date', 'desc'))
             return render.user_detail(user, tweets)
 
 class Relation:
@@ -172,7 +178,7 @@ class Relation:
                         to_user=user)
             except:
                 pass
-            raise web.redirect('/following')
+            raise web.seeother('/following')
 
         if action == 'unfollow':
             user = get_object_or_throw(User, User.username == username)
@@ -180,7 +186,7 @@ class Relation:
                 (Relationship.from_user == get_current_user()) &
                 (Relationship.to_user == user)
             ).execute()
-            raise web.redirect('/following')
+            raise web.seeother('/following')
 
 
 if __name__ == "__main__":

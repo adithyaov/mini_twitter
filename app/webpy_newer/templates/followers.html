@@ -3,9 +3,38 @@ $def with (users_following_you)
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Followers</title>
+    <title>Users</title>
+    <link rel="stylesheet" href="/static/blaze.min.css">
 </head>
 <body>
 
+  <ul class="c-nav c-nav--inline u-highest">
+          <span class="c-nav__item"><i class="fa fa-home"></i> Home</span>
+          <span class="c-nav__item c-nav__item--right"><i class="fa fa-user"></i><a href="/logout">Logout</a></span>
+  </ul>
+  <div class="o-container o-container--medium">
+
+
+
+    $for i in users_following_you:
+        <div class="c-card">
+          <div class="o-grid o-grid--demo">
+              <div class="o-grid__cell">
+                <div class="o-grid">
+                  <div class="o-grid__cell">
+                      <img class="o-image" src="http://lorempixel.com/200/200/#$i.username" alt = "Not available">
+                  </div>
+                  <div class="o-grid__cell">
+                    <header class="c-card__header">
+                      <h2 class="c-heading">$i.username</h2>
+                    </header>
+                    <p>$i.email</p>
+                  </div>
+                </div>
+              </div>
+           </div>
+          </div>
+
+  </div>
 </body>
 </html>
