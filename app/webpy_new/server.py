@@ -78,6 +78,7 @@ class Timeline:
 class Register:
     def POST(self):
         should_be_logged_out()
+        echo = 0
         try:
             post_data = web.input(_method='post')
             with db.transaction():
@@ -88,9 +89,14 @@ class Register:
                     join_date=datetime.datetime.now())
 
                 auth_user(user)
-            raise web.redirect('/timeline')
+            echo = 1
         except Exception as e:
             print e
+            echo = 0
+
+        if echo == 1:
+            raise web.redirect('/timeline')
+        else:
             raise web.redirect('/register')
 
     def GET(self):
@@ -101,16 +107,24 @@ class Register:
 class Login:
     def POST(self):
         should_be_logged_out()
+        echo = 0
         try:
             post_data = web.input(_method='post')
             user = User.get(
                 username=post_data['username'],
                 password=post_data['password'])
-        except:
-            raise web.redirect('/login')
-        else:
             auth_user(user)
+            echo = 1
+        except Exception as e:
+            print e
+            echo = 0
+            
+        if echo == 1:
             raise web.redirect('/timeline')
+        else:
+            raise web.redirect('/login')
+
+
 
     def GET(self):
         should_be_logged_out()
