@@ -163,8 +163,13 @@ class Followers:
 class Users:
     def GET(self, username):
         should_be_logged_in()
-        if username == None or username == '_':
-            users = User.select()
+        if username == None or username == '_' or username == '':
+            user = get_current_user()
+            following_users = get_current_user().following()
+            following_usernames = []
+            for x in following_users:
+                following_usernames.append(x.username)
+            users = User.select().where(User.username.not_in(following_usernames))
             return render.users(users)
         else:
             user = get_object_or_throw(User, User.username == username)
