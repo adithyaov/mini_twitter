@@ -14,7 +14,8 @@ urls = (
     "/relation/(.+)/(.+)", "Relation",
     "/timeline", "Timeline",
     "/register", "Register",
-    "/*", "Login"
+    "/test/(.*)", "Test",
+    "/*", "Login",
 )
 
 app = web.application(urls, locals())
@@ -202,6 +203,9 @@ class Relation:
             ).execute()
             raise web.seeother('/following')
 
+class Test:
+	def GET(self, message):
+	    return render.error(message)
 
 if __name__ == "__main__":
     app.run()
